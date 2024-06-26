@@ -6,7 +6,7 @@ const formData = {
 const form = document.querySelector('.feedback-form');
 
 form.addEventListener('input', event => {
-  formData[event.target.name] = event.target.value;
+  formData[event.target.name] = event.target.value.trim();
   localStorage.setItem('feedback-form-state', JSON.stringify(formData));
 });
 
@@ -25,6 +25,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 form.addEventListener('submit', event => {
   event.preventDefault();
+
+  formData.email = form.elements.email.value.trim();
+  formData.message = form.elements.message.value.trim();
 
   if (!formData.email || !formData.message) {
     alert('Fill please all fields');
